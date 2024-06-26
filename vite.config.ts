@@ -9,7 +9,7 @@ export default defineConfig({
     minify: true,
     sourcemap: false,
     rollupOptions: {
-      input: './src/App.tsx',
+      input: './src/main.tsx',
     },
   },
 });
