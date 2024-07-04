@@ -31,7 +31,7 @@ const App: React.FC = () => {
     buttonTxt: "white",
   };
 
-  const formStyles = {
+  const formStyles3 = {
     title: "this si the title",
     backgroundColor: "black",
     color: "gray",
@@ -41,14 +41,14 @@ const App: React.FC = () => {
     buttonTxt: "black",
   };
 
-  const formStyles3 = {
+  const formStyles = {
     title: "this si the title",
     backgroundColor: "dodgerblue",
-    color: "gray",
+    color: "white",
     border: "",
-    inputBG: "#1a2421",
-    buttonBg: "gray",
-    buttonTxt: "black",
+    inputBG: "white",
+    buttonBg: "black",
+    buttonTxt: "white",
   };
 
   return (
@@ -61,20 +61,37 @@ const App: React.FC = () => {
     >
       <h1>{formStyles.title}</h1>
       <input
-        style={{backgroundColor: formStyles.inputBG, border: formStyles.border }}
+        style={{
+          backgroundColor: formStyles.inputBG,
+          border: formStyles.border,
+        }}
         type="text"
         placeholder="name"
       />
       <input
-        style={{backgroundColor: formStyles.inputBG, border: formStyles.border }}
+        style={{
+          backgroundColor: formStyles.inputBG,
+          border: formStyles.border,
+        }}
         type="text"
         placeholder="email"
       />
       <textarea
-        style={{backgroundColor: formStyles.inputBG, border: formStyles.border }}
+        style={{
+          backgroundColor: formStyles.inputBG,
+          border: formStyles.border,
+        }}
         placeholder="body"
       ></textarea>
-      <button style={{ border: formStyles.border, background: formStyles.buttonBg, color: formStyles.buttonTxt }}>submit</button>
+      <button
+        style={{
+          border: formStyles.border,
+          background: formStyles.buttonBg,
+          color: formStyles.buttonTxt,
+        }}
+      >
+        submit
+      </button>
     </div>
   );
 };
