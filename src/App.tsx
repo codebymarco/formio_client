@@ -3,25 +3,6 @@ import axios from "axios";
 import "./App.css";
 
 const App: React.FC = () => {
-  const [data, setData] = useState<any>();
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get(
-          "https://jsonplaceholder.typicode.com/posts/1"
-        );
-        setData(response.data);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
-    };
-
-    fetchData();
-  }, []);
-
-  if (!data) return <div>Loading...</div>;
-
   const formStyles2 = {
     title: "this si the title",
     backgroundColor: "transparent",
@@ -50,6 +31,25 @@ const App: React.FC = () => {
     buttonBg: "black",
     buttonTxt: "white",
   };
+
+  const [data, setData] = useState<any>();
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(
+          "https://jsonplaceholder.typicode.com/posts/1"
+        );
+        setData(response.data);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  if (!data) return <div>Loading...</div>;
 
   return (
     <div
