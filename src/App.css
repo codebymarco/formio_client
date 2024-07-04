@@ -1,6 +1,36 @@
+*{
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
 .form{
-  background-color: yellow;
   display: flex;
   flex-direction: column;
   text-align: center;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  padding: 20px;
+}
+
+.form input{
+  height: 30px;
+  width: 300px;
+  padding: 10px;
+  outline: none;
+  border: none;
+}
+.form textarea{
+  height: 150px;
+  width: 300px;
+  padding: 10px;
+  outline: none;
+  border: none;
+}
+.form button{
+  height: 35px;
+  width: 300px;
+  border: none;
+  font-size: 1.2rem;
 }
