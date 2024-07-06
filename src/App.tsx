@@ -3,33 +3,36 @@ import axios from "axios";
 import "./App.css";
 
 const App: React.FC = () => {
-  const formStyles2 = {
+  const formStyles = {
     title: "this si the title",
     backgroundColor: "transparent",
     color: "black",
     border: "1px solid black",
     buttonBg: "black",
     buttonTxt: "white",
+    inputTxt: "black",
   };
 
-  const formStyles3 = {
+  const formStyles5 = {
     title: "this si the title",
     backgroundColor: "black",
     color: "gray",
     border: "",
     inputBG: "#1a2421",
-    buttonBg: "gray",
-    buttonTxt: "black",
+    buttonBg: "#1a2421",
+    buttonTxt: "white",
+    inputTxt: "white",
   };
 
-  const formStyles = {
+  const formStyles7 = {
     title: "this si the title",
     backgroundColor: "dodgerblue",
-    color: "white",
+    color: "black",
     border: "",
     inputBG: "white",
     buttonBg: "black",
     buttonTxt: "white",
+    inputTxt: "black",
   };
 
   const [data, setData] = useState<any>();
@@ -55,6 +58,7 @@ const App: React.FC = () => {
     <div
       style={{
         backgroundColor: formStyles.backgroundColor,
+        border: formStyles.border,
         color: formStyles.color,
       }}
       className="form"
@@ -64,6 +68,7 @@ const App: React.FC = () => {
         style={{
           backgroundColor: formStyles.inputBG,
           border: formStyles.border,
+          color: formStyles.inputTxt,
         }}
         type="text"
         placeholder="name"
@@ -72,6 +77,7 @@ const App: React.FC = () => {
         style={{
           backgroundColor: formStyles.inputBG,
           border: formStyles.border,
+          color: formStyles.inputTxt,
         }}
         type="text"
         placeholder="email"
@@ -80,6 +86,7 @@ const App: React.FC = () => {
         style={{
           backgroundColor: formStyles.inputBG,
           border: formStyles.border,
+          color: formStyles.inputTxt,
         }}
         placeholder="body"
       ></textarea>
