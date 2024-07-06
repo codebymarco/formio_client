@@ -4,6 +4,8 @@ import { form } from "./helpers";
 import useGetData from "./useGetData";
 
 const App: React.FC = () => {
+  // todo: get the siteid as part of the url part of the url query params
+
   const formStylesOne = {
     title: "this si the title",
     backgroundColor: "transparent",
