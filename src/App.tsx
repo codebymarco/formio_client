@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
 import "./App.css";
+import { form } from "./helpers";
+import useGetData from "./useGetData";
 
 const App: React.FC = () => {
-  const formStyles = {
+  const formStylesOne = {
     title: "this si the title",
     backgroundColor: "transparent",
     color: "black",
@@ -11,9 +12,10 @@ const App: React.FC = () => {
     buttonBg: "black",
     buttonTxt: "white",
     inputTxt: "black",
+    inputBG: "",
   };
 
-  const formStyles5 = {
+  const formStylesTwo = {
     title: "this si the title",
     backgroundColor: "black",
     color: "gray",
@@ -24,7 +26,7 @@ const App: React.FC = () => {
     inputTxt: "white",
   };
 
-  const formStyles7 = {
+  const formStylesThree = {
     title: "this si the title",
     backgroundColor: "dodgerblue",
     color: "black",
@@ -35,66 +37,99 @@ const App: React.FC = () => {
     inputTxt: "black",
   };
 
-  const [data, setData] = useState<any>();
+  const { data } = useGetData(
+    `http://localhost:5000/api/scripts/668938bdbe6a410a31e7828b`
+  );
+  const [form, setForm] = useState<form>({});
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get(
-          "https://jsonplaceholder.typicode.com/posts/1"
-        );
-        setData(response.data);
-      } catch (error) {
-        console.error("Error fetching data:", error);
+    if (data) {
+      setForm(data);
+
+      if (data.theme === `ONE`) {
+        setForm((prevData: any) => ({
+          ...prevData,
+          backgroundColor: formStylesOne.backgroundColor,
+          color: formStylesOne.color,
+          border: formStylesOne.border,
+          inputBG: formStylesOne.inputBG,
+          buttonBg: formStylesOne.buttonBg,
+          buttonTxt: formStylesOne.buttonTxt,
+          inputTxt: formStylesOne.inputTxt,
+        }));
       }
-    };
+      if (data.theme === `TWO`) {
+        setForm((prevData: any) => ({
+          ...prevData,
+          backgroundColor: formStylesTwo.backgroundColor,
+          color: formStylesTwo.color,
+          border: formStylesTwo.border,
+          inputBG: formStylesTwo.inputBG,
+          buttonBg: formStylesTwo.buttonBg,
+          buttonTxt: formStylesTwo.buttonTxt,
+          inputTxt: formStylesTwo.inputTxt,
+        }));
+      }
+      if (data.theme === `THREE`) {
+        setForm((prevData: any) => ({
+          ...prevData,
+          backgroundColor: formStylesThree.backgroundColor,
+          color: formStylesThree.color,
+          border: formStylesThree.border,
+          inputBG: formStylesThree.inputBG,
+          buttonBg: formStylesThree.buttonBg,
+          buttonTxt: formStylesThree.buttonTxt,
+          inputTxt: formStylesThree.inputTxt,
+        }));
+      }
+    }
+  }, [data]);
 
-    fetchData();
-  }, []);
-
-  if (!data) return <div>Loading...</div>;
+  if (!data) {
+    return null;
+  }
 
   return (
     <div
       style={{
-        backgroundColor: formStyles.backgroundColor,
-        border: formStyles.border,
-        color: formStyles.color,
+        backgroundColor: form.backgroundColor,
+        border: form.border,
+        color: form.color,
       }}
       className="form"
     >
-      <h1>{formStyles.title}</h1>
+      <h1>{form.title}</h1>
       <input
         style={{
-          backgroundColor: formStyles.inputBG,
-          border: formStyles.border,
-          color: formStyles.inputTxt,
+          backgroundColor: form.inputBG,
+          border: form.border,
+          color: form.inputTxt,
         }}
         type="text"
         placeholder="name"
       />
       <input
         style={{
-          backgroundColor: formStyles.inputBG,
-          border: formStyles.border,
-          color: formStyles.inputTxt,
+          backgroundColor: form.inputBG,
+          border: form.border,
+          color: form.inputTxt,
         }}
         type="text"
         placeholder="email"
       />
       <textarea
         style={{
-          backgroundColor: formStyles.inputBG,
-          border: formStyles.border,
-          color: formStyles.inputTxt,
+          backgroundColor: form.inputBG,
+          border: form.border,
+          color: form.inputTxt,
         }}
         placeholder="body"
       ></textarea>
       <button
         style={{
-          border: formStyles.border,
-          background: formStyles.buttonBg,
-          color: formStyles.buttonTxt,
+          border: form.border,
+          background: form.buttonBg,
+          color: form.buttonTxt,
         }}
       >
         submit
