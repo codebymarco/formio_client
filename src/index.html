@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Embedded React App</title>
+  
+  </head>
+<link rel="stylesheet" type="text/css" href="https://formly-six.vercel.app/assets/main-Dnyu9UBb.css">
+
+  <body>
+    <h1>My HTML Page</h1>
+
+    <!-- Container for React app -->
+    <div id="root"></div>
+
+    <!-- Embed script -->
+    <script>
+      var formio_siteID = "your-site-id";
+  </script>
+    <script defer>
+      (function () {
+        const containerId = "root";
+
+        // Function to check if container is empty
+        function isContainerEmpty(container) {
+          return container && container.innerHTML.trim() === "";
+        }
+
+        // Function to create and mount React app
+        function mountReactApp() {
+          const container = document.getElementById(containerId);
+
+          if (!isContainerEmpty(container)) {
+            console.warn(
+              `Container '${containerId}' is not empty. React will mount into the existing content.`
+            );
+          }
+
+          const script = document.createElement("script");
+          script.src = "https://formly-six.vercel.app/assets/main-t4LZk3Xn.js"; // Replace with your actual Vercel deployment URL
+          script.async = true;
+          container.appendChild(script);
+        }
+
+        // Wait for DOMContentLoaded to ensure the DOM is fully loaded
+        document.addEventListener("DOMContentLoaded", mountReactApp);
+      })();
+    </script>
+  </body>
+</html>
