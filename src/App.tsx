@@ -4,6 +4,13 @@ import { form } from "./helpers";
 import useGetData from "./useGetData";
 
 const App: React.FC = () => {
+  const scriptTag = document.querySelector("script[data-siteid]");
+  let siteId = scriptTag ? scriptTag.getAttribute("data-siteid") : null;
+  console.log("data-sdie", siteId);
+  if (!siteId) {
+    siteId = "66eb0f7bda70b9b9136bbd65";
+  }
+
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [body, setBody] = useState("");
@@ -44,9 +51,7 @@ const App: React.FC = () => {
     inputTxt: "black",
   };
 
-  const { data } = useGetData(
-    `http://localhost:5000/api/scripts/66eb0f7bda70b9b9136bbd65`
-  );
+  const { data } = useGetData(`http://localhost:5000/api/scripts/${siteId}`);
   const [form, setForm] = useState<form>({});
 
   useEffect(() => {

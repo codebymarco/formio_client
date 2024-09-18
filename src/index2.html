@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Embedded React App</title>
+  
+  </head>
+<link rel="stylesheet" type="text/css" href="../dist/assets/main-DIAfHAi5.css">
+
+  <body>
+    <h1>My HTML Page</h1>
+
+    <!-- Container for React app -->
+    <div id="root"></div>
+
+    <!-- Embed script -->
+    <script>
+      var formio_siteID = "66eb0f7bda70b9b9136bbd65";
+  </script>
+    <script defer>
+      (function () {
+        const containerId = "root";
+
+        // Function to check if container is empty
+        function isContainerEmpty(container) {
+          return container && container.innerHTML.trim() === "";
+        }
+
+        // Function to create and mount React app
+        function mountReactApp() {
+          const container = document.getElementById(containerId);
+
+          if (!isContainerEmpty(container)) {
+            console.warn(
+              `Container '${containerId}' is not empty. React will mount into the existing content.`
+            );
+          }
+
+          const script = document.createElement("script");
+          script.src = "../dist/assets/main-CStZ6U0L.js"; // Replace with your actual Vercel deployment URL
+          script.async = true;
+          script.setAttribute("data-siteid", formio_siteID);
+          container.appendChild(script);
+        }
+
+        // Wait for DOMContentLoaded to ensure the DOM is fully loaded
+        document.addEventListener("DOMContentLoaded", mountReactApp);
+      })();
+    </script>
+  </body>
+</html>
