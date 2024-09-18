@@ -4,12 +4,18 @@ import { form } from "./helpers";
 import useGetData from "./useGetData";
 
 const App: React.FC = () => {
-  const scriptTag = document.querySelector("script[data-siteid]");
-  let siteId = scriptTag ? scriptTag.getAttribute("data-siteid") : null;
-  console.log("data-sdie", siteId);
-  if (!siteId) {
-    siteId = "66eb0f7bda70b9b9136bbd65";
-  }
+  const [siteId, setSiteId] = useState<string | null>(null);
+
+  useEffect(() => {
+    const scriptTag = document.querySelector("script[data-siteid]");
+    let siteIdValue = scriptTag ? scriptTag.getAttribute("data-siteid") : null;
+    console.log("data-site", siteIdValue);
+
+    if (!siteIdValue) {
+      siteIdValue = "66eb0f7bda70b9b9136bbd65"; // Default value
+    }
+    setSiteId(siteIdValue);
+  }, []);
 
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -124,11 +130,11 @@ const App: React.FC = () => {
     if (isValid) {
       console.log("All active fields have values.");
     } else {
-      console.log("All active fields dont have values.");
+      console.log("All active fields don't have values.");
     }
   };
 
-  if (!data) {
+  if (!data || !siteId) {
     return null;
   }
 
