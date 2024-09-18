@@ -94,6 +94,18 @@ const App: React.FC = () => {
 
   const sendEmail = () => {
     console.log("send email");
+  
+    // check if all enabled fields have values
+    if (
+      (!form.namefield || (form.namefield && name !== "")) &&
+      (!form.bodyfield || (form.bodyfield && body !== "")) &&
+      (!form.emailfield || (form.emailfield && email !== ""))
+    ) {
+      // All active fields have valid values
+      alert("All active fields have values.");
+    } else {
+      alert("Please fill in all active fields.");
+    }
   };
 
   if (!data) {
