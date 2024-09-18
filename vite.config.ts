@@ -10,6 +10,17 @@ export default defineConfig({
     sourcemap: false,
     rollupOptions: {
       input: './src/main.tsx',
+      output: {
+        // Ensure consistent filenames for JS and CSS
+        entryFileNames: 'assets/js/[name].js',
+        chunkFileNames: 'assets/js/[name].js',
+        assetFileNames: ({ name }) => {
+          if (/\.(css)$/.test(name ?? '')) {
+            return 'assets/css/[name][extname]';
+          }
+          return 'assets/[name][extname]';
+        },
+      },
     },
   },
 });
