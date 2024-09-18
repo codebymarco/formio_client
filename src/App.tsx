@@ -6,7 +6,10 @@ import useGetData from "./useGetData";
 const App: React.FC = () => {
   // todo: get the siteid as part of the url part of the url query params
 
-  console.log('hello')
+  console.log("hello");
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [body, setBody] = useState("");
 
   const formStylesOne = {
     title: "this si the title",
@@ -42,7 +45,7 @@ const App: React.FC = () => {
   };
 
   const { data } = useGetData(
-    `http://localhost:5000/api/scripts/668938bdbe6a410a31e7828b`
+    `http://localhost:5000/api/scripts/66eb0f7bda70b9b9136bbd65`
   );
   const [form, setForm] = useState<form>({});
 
@@ -89,6 +92,10 @@ const App: React.FC = () => {
     }
   }, [data]);
 
+  const sendEmail = () => {
+    console.log("send email");
+  };
+
   if (!data) {
     return null;
   }
@@ -103,38 +110,54 @@ const App: React.FC = () => {
       className="form"
     >
       <h1>{form.title}</h1>
-      <input
-        style={{
-          backgroundColor: form.inputBG,
-          border: form.border,
-          color: form.inputTxt,
-        }}
-        type="text"
-        placeholder="name"
-      />
-      <input
-        style={{
-          backgroundColor: form.inputBG,
-          border: form.border,
-          color: form.inputTxt,
-        }}
-        type="text"
-        placeholder="email"
-      />
-      <textarea
-        style={{
-          backgroundColor: form.inputBG,
-          border: form.border,
-          color: form.inputTxt,
-        }}
-        placeholder="body"
-      ></textarea>
+      {form.namefield ? (
+        <input
+          onChange={(e) => setName(e.target.value)}
+          value={name}
+          style={{
+            backgroundColor: form.inputBG,
+            border: form.border,
+            color: form.inputTxt,
+          }}
+          type="text"
+          placeholder="name"
+        />
+      ) : null}
+
+      {form.emailfield ? (
+        <input
+          style={{
+            backgroundColor: form.inputBG,
+            border: form.border,
+            color: form.inputTxt,
+          }}
+          onChange={(e) => setEmail(e.target.value)}
+          value={email}
+          type="text"
+          placeholder="email"
+        />
+      ) : null}
+
+      {form.bodyfield ? (
+        <textarea
+          onChange={(e) => setBody(e.target.value)}
+          value={body}
+          style={{
+            backgroundColor: form.inputBG,
+            border: form.border,
+            color: form.inputTxt,
+          }}
+          placeholder="body"
+        ></textarea>
+      ) : null}
+
       <button
         style={{
           border: form.border,
           background: form.buttonBg,
           color: form.buttonTxt,
         }}
+        onClick={sendEmail}
       >
         submit
       </button>
