@@ -4,7 +4,9 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Embedded React App</title>
-  
+    <script>
+      window.siteId = "66eb483fda70b9b9136bbf06"; // Set the siteId globally
+    </script>
   </head>
 <link rel="stylesheet" type="text/css" href="../dist/assets/main-DIAfHAi5.css">
 
@@ -13,11 +15,6 @@
 
     <!-- Container for React app -->
     <div id="root"></div>
-
-    <!-- Embed script -->
-    <script>
-      var formio_siteID = "66eb483fda70b9b9136bbf06";
-  </script>
     <script defer>
       (function () {
         const containerId = "root";
@@ -40,7 +37,6 @@
           const script = document.createElement("script");
           script.src = "../dist/assets/main-De_FVb1j.js "; // Replace with your actual Vercel deployment URL
           script.async = true;
-          script.setAttribute("data-siteid", "66eb483fda70b9b9136bbf06");
           container.appendChild(script);
         }
 

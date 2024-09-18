@@ -7,14 +7,10 @@ const App: React.FC = () => {
   const [siteId, setSiteId] = useState<string | null>(null);
 
   useEffect(() => {
-    const scriptTag = document.querySelector("script[data-siteid]");
-    let siteIdValue = scriptTag ? scriptTag.getAttribute("data-siteid") : null;
-    console.log("data-site", siteIdValue);
-
-    if (!siteIdValue) {
-      siteIdValue = "66eb0f7bda70b9b9136bbd65"; // Default value
-    }
-    setSiteId(siteIdValue);
+    // Access the global window object to get siteId
+    const siteIdFromWindow = (window as any).siteId || null;
+    setSiteId(siteIdFromWindow);
+    console.log("Site ID from window:", siteIdFromWindow);
   }, []);
 
   const [name, setName] = useState("");
