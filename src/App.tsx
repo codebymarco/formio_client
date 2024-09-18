@@ -10,7 +10,7 @@ const App: React.FC = () => {
     // Access the global window object to get siteId
     const siteIdFromWindow = (window as any).siteId || null;
     setSiteId(siteIdFromWindow);
-    console.log("Site ID from window:", siteIdFromWindow);
+    console.log("Site dow:", siteIdFromWindow);
   }, []);
 
   const [name, setName] = useState("");
