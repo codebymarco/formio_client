@@ -4,15 +4,15 @@ import { form } from "./helpers";
 import useGetData from "./useGetData";
 
 const App: React.FC = () => {
-  // todo: get the siteid as part of the url part of the url query params
-
-  console.log("hello");
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [body, setBody] = useState("");
+  const [nameError, setNameError] = useState(false);
+  const [emailError, setEmailError] = useState(false);
+  const [bodyError, setBodyError] = useState(false);
 
   const formStylesOne = {
-    title: "this si the title",
+    title: "this is the title",
     backgroundColor: "transparent",
     color: "black",
     border: "1px solid black",
@@ -23,7 +23,7 @@ const App: React.FC = () => {
   };
 
   const formStylesTwo = {
-    title: "this si the title",
+    title: "this is the title",
     backgroundColor: "black",
     color: "gray",
     border: "",
@@ -34,7 +34,7 @@ const App: React.FC = () => {
   };
 
   const formStylesThree = {
-    title: "this si the title",
+    title: "this is the title",
     backgroundColor: "dodgerblue",
     color: "black",
     border: "",
@@ -93,18 +93,33 @@ const App: React.FC = () => {
   }, [data]);
 
   const sendEmail = () => {
-    console.log("send email");
-  
-    // check if all enabled fields have values
-    if (
-      (!form.namefield || (form.namefield && name !== "")) &&
-      (!form.bodyfield || (form.bodyfield && body !== "")) &&
-      (!form.emailfield || (form.emailfield && email !== ""))
-    ) {
-      // All active fields have valid values
-      alert("All active fields have values.");
+    let isValid = true;
+
+    if (form.namefield && name === "") {
+      setNameError(true);
+      isValid = false;
     } else {
-      alert("Please fill in all active fields.");
+      setNameError(false);
+    }
+
+    if (form.emailfield && email === "") {
+      setEmailError(true);
+      isValid = false;
+    } else {
+      setEmailError(false);
+    }
+
+    if (form.bodyfield && body === "") {
+      setBodyError(true);
+      isValid = false;
+    } else {
+      setBodyError(false);
+    }
+
+    if (isValid) {
+      console.log("All active fields have values.");
+    } else {
+      console.log("All active fields dont have values.");
     }
   };
 
@@ -128,9 +143,10 @@ const App: React.FC = () => {
           value={name}
           style={{
             backgroundColor: form.inputBG,
-            border: form.border,
+            border: nameError ? "2px solid red" : form.border,
             color: form.inputTxt,
           }}
+          onFocus={() => setNameError(false)} // Remove error border on focus
           type="text"
           placeholder="name"
         />
@@ -138,13 +154,14 @@ const App: React.FC = () => {
 
       {form.emailfield ? (
         <input
-          style={{
-            backgroundColor: form.inputBG,
-            border: form.border,
-            color: form.inputTxt,
-          }}
           onChange={(e) => setEmail(e.target.value)}
           value={email}
+          style={{
+            backgroundColor: form.inputBG,
+            border: emailError ? "2px solid red" : form.border,
+            color: form.inputTxt,
+          }}
+          onFocus={() => setEmailError(false)} // Remove error border on focus
           type="text"
           placeholder="email"
         />
@@ -156,9 +173,10 @@ const App: React.FC = () => {
           value={body}
           style={{
             backgroundColor: form.inputBG,
-            border: form.border,
+            border: bodyError ? "2px solid red" : form.border,
             color: form.inputTxt,
           }}
+          onFocus={() => setBodyError(false)} // Remove error border on focus
           placeholder="body"
         ></textarea>
       ) : null}
