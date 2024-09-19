@@ -10,12 +10,11 @@ const App: React.FC = () => {
   const { postdata, suc, loading } = usePostData();
 
   useEffect(() => {
-    // Access the global window object to get siteId
     const siteIdFromWindow = (window as any).siteId || null;
     if (siteIdFromWindow) {
       setSiteId(siteIdFromWindow);
     } else {
-      setSiteId("66eb0f7bda70b9b9136bbd65");
+      setSiteId("66ec6d7ae6f3f44e1c46f8da");
     }
     console.log("Site dow:", siteIdFromWindow);
   }, []);
@@ -26,6 +25,7 @@ const App: React.FC = () => {
   const [nameError, setNameError] = useState(false);
   const [emailError, setEmailError] = useState(false);
   const [bodyError, setBodyError] = useState(false);
+  const [emailInvalidError, setEmailInvalidError] = useState(false); // New state for invalid email
 
   const formStylesOne = {
     title: "this is the title",
@@ -108,6 +108,12 @@ const App: React.FC = () => {
 
   console.log("form", form);
 
+  // Email validation function
+  const validateEmail = (email: string) => {
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailPattern.test(email);
+  };
+
   const sendEmail = async () => {
     let isValid = true;
 
@@ -125,6 +131,14 @@ const App: React.FC = () => {
       setEmailError(false);
     }
 
+    // Check if the email is in a valid format
+    if (form.emailfield && email !== "" && !validateEmail(email)) {
+      setEmailInvalidError(true);
+      isValid = false;
+    } else {
+      setEmailInvalidError(false);
+    }
+
     if (form.bodyfield && body === "") {
       setBodyError(true);
       isValid = false;
@@ -134,7 +148,6 @@ const App: React.FC = () => {
 
     if (isValid) {
       console.log("All active fields have values.");
-      // send the email here
       const obj = {
         name,
         email,
@@ -175,7 +188,7 @@ const App: React.FC = () => {
             border: nameError ? "2px solid red" : form.border,
             color: form.inputTxt,
           }}
-          onFocus={() => setNameError(false)} // Remove error border on focus
+          onFocus={() => setNameError(false)}
           type="text"
           placeholder="name"
         />
@@ -187,10 +200,14 @@ const App: React.FC = () => {
           value={email}
           style={{
             backgroundColor: form.inputBG,
-            border: emailError ? "2px solid red" : form.border,
+            border:
+              emailError || emailInvalidError ? "2px solid red" : form.border,
             color: form.inputTxt,
           }}
-          onFocus={() => setEmailError(false)} // Remove error border on focus
+          onFocus={() => {
+            setEmailError(false);
+            setEmailInvalidError(false); // Reset invalid error on focus
+          }}
           type="text"
           placeholder="email"
         />
@@ -205,7 +222,7 @@ const App: React.FC = () => {
             border: bodyError ? "2px solid red" : form.border,
             color: form.inputTxt,
           }}
-          onFocus={() => setBodyError(false)} // Remove error border on focus
+          onFocus={() => setBodyError(false)}
           placeholder="body"
         ></textarea>
       ) : null}
