@@ -2,14 +2,21 @@ import React, { useState, useEffect } from "react";
 import "./App.css";
 import { form } from "./helpers";
 import useGetData from "./useGetData";
+import { usePostData } from "./usePostData";
 
 const App: React.FC = () => {
   const [siteId, setSiteId] = useState<string | null>(null);
 
+  const { postdata } = usePostData();
+
   useEffect(() => {
     // Access the global window object to get siteId
     const siteIdFromWindow = (window as any).siteId || null;
-    setSiteId(siteIdFromWindow);
+    if (siteIdFromWindow) {
+      setSiteId(siteIdFromWindow);
+    } else {
+      setSiteId("66eb0f7bda70b9b9136bbd65");
+    }
     console.log("Site dow:", siteIdFromWindow);
   }, []);
 
@@ -99,7 +106,9 @@ const App: React.FC = () => {
     }
   }, [data]);
 
-  const sendEmail = () => {
+  console.log("form", form);
+
+  const sendEmail = async () => {
     let isValid = true;
 
     if (form.namefield && name === "") {
@@ -125,6 +134,19 @@ const App: React.FC = () => {
 
     if (isValid) {
       console.log("All active fields have values.");
+      // send the email here
+      const obj = {
+        name,
+        email,
+        body,
+        recipient: form.email,
+        reply_email: form.reply_email,
+        reply_email_content: form.reply_email_content,
+      };
+      await postdata(obj);
+      setName("");
+      setBody("");
+      setEmail("");
     } else {
       console.log("All active fields don't have values.");
     }
