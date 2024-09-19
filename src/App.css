@@ -28,6 +28,7 @@
   padding: 10px;
   outline: none;
   border: none;
+  resize: none;
 }
 .form button {
   height: 35px;
