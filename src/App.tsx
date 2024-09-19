@@ -7,7 +7,7 @@ import { usePostData } from "./usePostData";
 const App: React.FC = () => {
   const [siteId, setSiteId] = useState<string | null>(null);
 
-  const { postdata } = usePostData();
+  const { postdata, suc, loading } = usePostData();
 
   useEffect(() => {
     // Access the global window object to get siteId
@@ -211,6 +211,7 @@ const App: React.FC = () => {
       ) : null}
 
       <button
+        disabled={loading}
         style={{
           border: form.border,
           background: form.buttonBg,
@@ -218,7 +219,7 @@ const App: React.FC = () => {
         }}
         onClick={sendEmail}
       >
-        submit
+        {suc ? "sent" : loading ? "loading" : "submit"}
       </button>
     </div>
   );

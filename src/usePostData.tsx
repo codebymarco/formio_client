@@ -5,8 +5,10 @@ export const usePostData = () => {
 
   const [error, setError] = useState<any>();
   const [loading, setLoading] = useState<boolean>(false);
+  const [suc, setSuc] = useState<boolean>(false);
 
   const postdata = async (obj: any) => {
+    setSuc(false)
     setLoading(true);
     setError(null);
     const response = await fetch(`${api}/api/message/siteid`, {
@@ -25,8 +27,12 @@ export const usePostData = () => {
     }
     if (response.ok) {
       setLoading(false);
+      setSuc(true);
+      setTimeout(()=>{
+        setSuc(false);
+      }, 2000)
     }
   };
 
-  return { postdata, loading, error };
+  return { postdata, loading, error, suc };
 };
