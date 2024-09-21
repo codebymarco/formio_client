@@ -60,7 +60,7 @@ const App: React.FC = () => {
     inputTxt: "black",
   };
 
-  const { data } = useGetData(`http://localhost:5000/api/scripts/${siteId}`);
+  const { data } = useGetData(`https://formio-backend-35jj.onrender.com/api/scripts/${siteId}`);
   const [form, setForm] = useState<form>({});
 
   useEffect(() => {
